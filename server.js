@@ -11,6 +11,9 @@ const profileRoute = require("./routes/api/profile");
 // Connect to DB
 connectDB();
 
+// Set up middleware
+app.use(express.json({ extended: false }));
+
 // Define routes
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
