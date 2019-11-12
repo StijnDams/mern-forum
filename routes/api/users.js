@@ -3,10 +3,12 @@ const { check, validationResult } = require("express-validator");
 const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const config = require("config");
 
 const router = express.Router();
 
 const User = require("../../models/User");
+const jwtSecret = config.get("jwtSecret");
 
 // @route   POST api/users
 // @desc    Register user
@@ -65,7 +67,7 @@ router.post(
         }
       };
 
-      jwt.sign(payload, config.get("jwtSecret"), (err, token) => {
+      jwt.sign(payload, jwtSecret, (err, token) => {
         if (err) throw err;
         res.json({ token });
       });
